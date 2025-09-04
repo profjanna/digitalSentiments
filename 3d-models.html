@@ -141,9 +141,7 @@
                 <h3>Available Heirlooms</h3>
                 <ul>
                     <!--
-                        To add your own files, create a link like the one below.
-                        Make sure the 'data-filepath' points to the correct location
-                        of your .stl file in your GitHub repository.
+         3d model list
                     -->
                     <li class="model-item">
                         <a href="#" data-filepath="3d-models/kitty.stl">kitty</a>
@@ -220,7 +218,7 @@
             // Use a TextureLoader to set the background to an image
             const textureLoader = new THREE.TextureLoader();
             textureLoader.load(
-                'https://placehold.co/1280x720/E0E0E0/C0C0C0?text=Background+Image', // Replace with the URL of your background image
+                '3d-models/bliss.png', // Replace with the URL of your background image
                 function(texture) {
                     scene.background = texture;
                 }
