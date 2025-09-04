@@ -229,8 +229,8 @@
             renderer.setPixelRatio(window.devicePixelRatio);
             viewerContainer.appendChild(renderer.domElement);
 
-            // Lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            // Lights changed from.5 to.7
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
             scene.add(ambientLight);
             const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
             directionalLight.position.set(0, 10, 5);
@@ -264,7 +264,7 @@
 
                 const loader = new THREE.STLLoader();
                 loader.load(url, function (geometry) {
-                    const material = new THREE.MeshPhongMaterial({ color: 0xAAAAAA, specular: 0x111111, shininess: 200 });
+                    const material = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, specular: 0x111111, shininess: 200 });
                     model = new THREE.Mesh(geometry, material);
                     
                     // Center the model in the scene
