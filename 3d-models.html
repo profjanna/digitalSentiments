@@ -216,7 +216,15 @@
         window.onload = function() {
             // Scene setup
             const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xd0d0d0);
+
+            // Use a TextureLoader to set the background to an image
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.load(
+                'https://placehold.co/1280x720/E0E0E0/C0C0C0?text=Background+Image', // Replace with the URL of your background image
+                function(texture) {
+                    scene.background = texture;
+                }
+            );
 
             // Camera setup
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -329,6 +337,15 @@
 
             viewerContainer.addEventListener('touchend', function() {
                 isDragging = false;
+            });
+            
+            // Add mouse wheel listener for zooming
+            viewerContainer.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                // Adjust the camera's Z position based on the wheel direction
+                camera.position.z += e.deltaY * 0.01;
+                // Clamp the zoom to a reasonable range
+                camera.position.z = Math.max(0.5, Math.min(10, camera.position.z));
             });
 
             // Handle window resize
