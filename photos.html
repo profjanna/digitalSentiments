@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Photo Gallery</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #C0C0C0; /* Classic Windows 95 gray */
+            color: #000000;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 960px;
+            background-color: #FFFFFF;
+            border: 2px solid #000000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        .header p {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .photo-item {
+            width: 250px;
+            background-color: #F0F0F0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .photo-item img {
+            width: 100%;
+            height: auto;
+        }
+        .photo-caption {
+            font-size: 0.9em;
+            text-align: center;
+            margin: 10px 0 5px 0;
+        }
+        .photo-links {
+            text-align: center;
+            font-size: 0.8em;
+        }
+        .photo-links a {
+            color: #000000;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #000000;
+            padding: 5px 10px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #808080;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Family Photo Gallery</h1>
+            <p>Click on an image to view it full size or use the download link below each one.</p>
+        </header>
+
+        <!-- Back Button -->
+        <a href="./" class="back-link">
+            <-- Back to Archive
+        </a>
+
+        <!-- Photo Gallery -->
+        <div class="gallery">
+            
+            <!-- Sample Photo Item 1 -->
+            <div class="photo-item">
+                <a href="https://raw.githubusercontent.com/your-username/your-repo/main/photos/family-picnic-1995.jpg" target="_blank">
+                    <!-- Placeholder image - replace with your own! -->
+                    <img src="https://placehold.co/250x180/E0E0E0/000000?text=Picnic+1995" alt="Family Picnic, 1995">
+                </a>
+                <div class="photo-caption">
+                    Family Picnic, Summer 1995
+                </div>
+                <div class="photo-links">
+                    <a href="https://raw.githubusercontent.com/your-username/your-repo/main/photos/family-picnic-1995.jpg" download>Download</a>
+                </div>
+            </div>
+
+            <!-- Sample Photo Item 2 -->
+            <div class="photo-item">
+                <a href="https://raw.githubusercontent.com/your-username/your-repo/main/photos/grandma-bday-1978.jpg" target="_blank">
+                    <img src="https://placehold.co/250x180/E0E0E0/000000?text=Grandma%27s+Bday" alt="Grandma's 50th Birthday, 1978">
+                </a>
+                <div class="photo-caption">
+                    Grandma's 50th Birthday, 1978
+                </div>
+                <div class="photo-links">
+                    <a href="https://raw.githubusercontent.com/your-username/your-repo/main/photos/grandma-bday-1978.jpg" download>Download</a>
+                </div>
+            </div>
+
+            <!-- Sample Photo Item 3 -->
+            <div class="photo-item">
+                <a href="https://raw.githubusercontent.com/your-username/your-repo/main/photos/graduation-2005.jpg" target="_blank">
+                    <img src="https://placehold.co/250x180/E0E0E0/000000?text=Graduation" alt="John's Graduation, 2005">
+                </a>
+                <div class="photo-caption">
+                    John's High School Graduation, 2005
+                </div>
+                <div class="photo-links">
+                    <a href="https://raw.githubusercontent.com/your-username/your-repo/main/photos/graduation-2005.jpg" download>Download</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <hr style="border-color: #000; margin-bottom: 10px;">
+        <span style="font-size: 0.9em; color: #000;">Powered by GitHub Pages</span>
+    </footer>
+
+</body>
+</html>
 
