@@ -358,7 +358,10 @@
             // Animation loop
             function animate() {
                 requestAnimationFrame(animate);
-                model.rotation.y += 0.01;
+                // Only rotate the model if it has been loaded
+                if (model) {
+                    model.rotation.y += 0.01;
+                }
                 renderer.render(scene, camera);
             }
 
@@ -376,7 +379,6 @@
 
             // Load a default model on page load
             loadSTL('3d-models/kitty.stl');
-            model.rotation.y += 0.01;
             animate();
         };
     </script>
