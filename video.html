@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Media Archive</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #C0C0C0;
+            color: #000000;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 960px;
+            background-color: #FFFFFF;
+            border: 2px solid #000000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        .header p {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .media-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid #000000;
+            padding: 15px;
+            background-color: #F0F0F0;
+        }
+        .media-section h2 {
+            margin: 0;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 5px;
+            font-size: 1.5em;
+        }
+        .media-item {
+            border: 1px dashed #A0A0A0;
+            padding: 10px;
+        }
+        .media-item h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        .media-item p {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        .media-player {
+            width: 100%;
+            height: auto;
+            border: 1px solid #000000;
+            margin-top: 10px;
+        }
+        .download-link {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: underline;
+            color: #000080;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #000000;
+            padding: 5px 10px;
+        }
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Family Media Archive</h1>
+            <p>A collection of digitized videos and audio clips.</p>
+        </header>
+
+        <!-- Back Button -->
+        <a href="./" class="back-link">
+            <-- Back to Archive
+        </a>
+
+        <!-- Main Content Area -->
+        <div class="content">
+
+            <!-- Video Section -->
+            <div class="media-section">
+                <h2>Family Videos</h2>
+                <!-- Example Video Item -->
+                <div class="media-item">
+                    <h3>Summer Vacation 1995</h3>
+                    <video class="media-player" controls>
+                        <!-- Replace 'videos/video-name.mp4' with the path to your video file -->
+                        <source src="videos/video-name.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>A short clip from our trip to the beach in Florida.</p>
+                    <a href="videos/video-name.mp4" download class="download-link">Download Video</a>
+                </div>
+
+                <!-- Add more video items below -->
+                <div class="media-item">
+                    <h3>Grandma's Birthday</h3>
+                    <video class="media-player" controls>
+                        <source src="videos/grandma-birthday.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>A clip from Grandma's 80th birthday party.</p>
+                    <a href="videos/grandma-birthday.mp4" download class="download-link">Download Video</a>
+                </div>
+
+            </div>
+
+            <!-- Audio Section -->
+            <div class="media-section">
+                <h2>Family Audio</h2>
+                <!-- Example Audio Item for a MIDI file -->
+                <div class="media-item">
+                    <h3>Aunt Mary's MIDI</h3>
+                    <p>A short musical clip composed by Aunt Mary in the late 90s.</p>
+                    <audio class="media-player" controls>
+                        <!-- Replace 'audio/aunt-mary.mid' with the path to your MIDI file -->
+                        <source src="audio/aunt-mary.mid" type="audio/midi">
+                        Your browser does not support the audio tag.
+                    </audio>
+                    <a href="audio/aunt-mary.mid" download class="download-link">Download Audio</a>
+                </div>
+
+                <!-- Example Audio Item for an MP3 file -->
+                <div class="media-item">
+                    <h3>Grandpa's Story</h3>
+                    <p>An oral history recording from 2005.</p>
+                    <audio class="media-player" controls>
+                        <source src="audio/grandpa-story.mp3" type="audio/mpeg">
+                        Your browser does not support the audio tag.
+                    </audio>
+                    <a href="audio/grandpa-story.mp3" download class="download-link">Download Audio</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
 
