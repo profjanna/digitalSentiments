@@ -360,7 +360,8 @@
                 requestAnimationFrame(animate);
                 // Only rotate the model if it has been loaded
                 if (model) {
-                    model.rotation.x += 0.01;
+                    model.rotation.x += 0.001;
+                    model.rotation.y += 0.001;
                 }
                 renderer.render(scene, camera);
             }
