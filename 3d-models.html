@@ -1,383 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Scanned Heirlooms</title>
-    <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: #C0C0C0;
-            color: #000000;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 960px;
-            background-color: #FFFFFF;
-            border: 2px solid #000000;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #000000;
-            padding-bottom: 10px;
-        }
-        .header h1 {
-            font-size: 2em;
-            margin: 0;
-        }
-        .header p {
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        .content {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .viewer-container {
-            flex: 2;
-            min-height: 400px;
-            background-color: #F0F0F0;
-            border: 1px solid #000000;
-            position: relative;
-            overflow: hidden;
-        }
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        .model-list {
-            flex: 1;
-            background-color: #F0F0F0;
-            border: 1px solid #000000;
-            padding: 10px;
-        }
-        .model-list h3 {
-            margin-top: 0;
-            border-bottom: 1px solid #000000;
-            padding-bottom: 5px;
-            font-size: 1.2em;
-        }
-        .model-item {
-            list-style: none;
-            padding: 5px 0;
-            border-bottom: 1px dashed #A0A0A0;
-            font-size: 0.9em;
-        }
-        .model-item:last-child {
-            border-bottom: none;
-        }
-        .model-item a {
-            color: #000000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .model-item a:hover {
-            color: #000080;
-            text-decoration: underline;
-        }
-        .download-link {
-            float: right;
-            font-size: 0.8em;
-            color: #808080;
-            text-decoration: underline;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            text-decoration: none;
-            color: #000000;
-            padding: 5px 10px;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.8em;
-            color: #808080;
-            margin-top: 20px;
-        }
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-        }
-    </style>
-    <!-- Three.js library for 3D rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- STLLoader to load .stl files -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Scanned Heirlooms</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #C0C0C0;
+            color: #000000;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 960px;
+            background-color: #FFFFFF;
+            border: 2px solid #000000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        .header p {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .viewer-container {
+            flex: 2;
+            min-height: 400px;
+            background-color: #F0F0F0;
+            border: 1px solid #000000;
+            position: relative;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .model-list {
+            flex: 1;
+            background-color: #F0F0F0;
+            border: 1px solid #000000;
+            padding: 10px;
+        }
+        .model-list h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 5px;
+            font-size: 1.2em;
+        }
+        .model-item {
+            list-style: none;
+            padding: 5px 0;
+            border-bottom: 1px dashed #A0A0A0;
+            font-size: 0.9em;
+        }
+        .model-item:last-child {
+            border-bottom: none;
+        }
+        .model-item a {
+            color: #000000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .model-item a:hover {
+            color: #000080;
+            text-decoration: underline;
+        }
+        .download-link {
+            float: right;
+            font-size: 0.8em;
+            color: #808080;
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #000000;
+            padding: 5px 10px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #808080;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <!-- Three.js library for 3D rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- STLLoader to load .stl files -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
 </head>
 <body>
 
-    <div class="container">
+    <div class="container">
 
-        <!-- Header Section -->
-        <header class="header">
-            <h1>3D Scanned Heirlooms</h1>
-            <p>View and download 3D models of our family's physical artifacts.</p>
-        </header>
+        <!-- Header Section -->
+        <header class="header">
+            <h1>3D Scanned Heirlooms</h1>
+            <p>View and download 3D models of our family's physical artifacts.</p>
+        </header>
 
-        <!-- Back Button -->
-        <a href="./" class="back-link">
-            <-- Back to Archive
-        </a>
+        <!-- Back Button -->
+        <a href="./" class="back-link">
+            <-- Back to Archive
+        </a>
 
-        <!-- Main Content Area -->
-        <div class="content">
-            <!-- 3D Viewer Container -->
-            <div id="viewer" class="viewer-container"></div>
-            
-            <!-- List of 3D Models -->
-            <div class="model-list">
-                <h3>Available Heirlooms</h3>
-                <ul>
-                    <!--
-         3d model list
-                    -->
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/kitty.stl">kitty</a>
-                        <a href="3d-models/kitty.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/monk.stl">monk</a>
-                        <a href="3d-models/monk.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/basket frog.stl">basket frog</a>
-                        <a href="3d-models/basket frog.stl" download class="download-link">Download</a>
-                    </li>
-                       <li class="model-item">
-                        <a href="#" data-filepath="3d-models/bottle guy.stl">bottle guy</a>
-                        <a href="3d-models/bottle guy.stl" download class="download-link">Download</a>
-                    </li>
-                     <li class="model-item">
-                        <a href="#" data-filepath="3d-models/cup.stl">cup</a>
-                        <a href="3d-models/cup.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/dale flat bottom girl.stl">dale earnhardt</a>
-                        <a href="3d-models/dale flat bottom girl.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/deer.stl">deer</a>
-                        <a href="3d-models/deer.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/frog (repaired).stl">frog</a>
-                        <a href="3d-models/frog (repaired).stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/horse pitcher.stl">horse pitcher</a>
-                        <a href="3d-models/horse pitcher.stl" download class="download-link">Download</a>
-                    </li>
-                   <li class="model-item">
-                        <a href="#" data-filepath="3d-models/mask (repaired).stl">mask</a>
-                        <a href="3d-models/mask (repaired).stl" download class="download-link">Download</a>
-                    </li>
-                     <li class="model-item">
-                        <a href="#" data-filepath="3d-models/monkey.stl">monkey</a>
-                        <a href="3d-models/monkey.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/robot (repaired).stl">robot</a>
-                        <a href="3d-models/robot (repaired).stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/skull.stl">skull</a>
-                        <a href="3d-models/skull.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/two face cat.stl">twoface cat</a>
-                        <a href="3d-models/two face cat.stl" download class="download-link">Download</a>
-                    </li>
-                    <li class="model-item">
-                        <a href="#" data-filepath="3d-models/zebra.stl">zebra</a>
-                        <a href="3d-models/zebra.stl" download class="download-link">Download</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
+        <!-- Main Content Area -->
+        <div class="content">
+            <!-- 3D Viewer Container -->
+            <div id="viewer" class="viewer-container"></div>
+            
+            <!-- List of 3D Models -->
+            <div class="model-list">
+                <h3>Available Heirlooms</h3>
+                <ul>
+                    <!--
+         3d model list
+                    -->
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/kitty.stl">kitty</a>
+                        <a href="3d-models/kitty.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/monk.stl">monk</a>
+                        <a href="3d-models/monk.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/basket frog.stl">basket frog</a>
+                        <a href="3d-models/basket frog.stl" download class="download-link">Download</a>
+                    </li>
+                       <li class="model-item">
+                        <a href="#" data-filepath="3d-models/bottle guy.stl">bottle guy</a>
+                        <a href="3d-models/bottle guy.stl" download class="download-link">Download</a>
+                    </li>
+                     <li class="model-item">
+                        <a href="#" data-filepath="3d-models/cup.stl">cup</a>
+                        <a href="3d-models/cup.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/dale flat bottom girl.stl">dale earnhardt</a>
+                        <a href="3d-models/dale flat bottom girl.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/deer.stl">deer</a>
+                        <a href="3d-models/deer.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/frog (repaired).stl">frog</a>
+                        <a href="3d-models/frog (repaired).stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/horse pitcher.stl">horse pitcher</a>
+                        <a href="3d-models/horse pitcher.stl" download class="download-link">Download</a>
+                    </li>
+                   <li class="model-item">
+                        <a href="#" data-filepath="3d-models/mask (repaired).stl">mask</a>
+                        <a href="3d-models/mask (repaired).stl" download class="download-link">Download</a>
+                    </li>
+                     <li class="model-item">
+                        <a href="#" data-filepath="3d-models/monkey.stl">monkey</a>
+                        <a href="3d-models/monkey.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/robot (repaired).stl">robot</a>
+                        <a href="3d-models/robot (repaired).stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/skull.stl">skull</a>
+                        <a href="3d-models/skull.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/two face cat.stl">twoface cat</a>
+                        <a href="3d-models/two face cat.stl" download class="download-link">Download</a>
+                    </li>
+                    <li class="model-item">
+                        <a href="#" data-filepath="3d-models/zebra.stl">zebra</a>
+                        <a href="3d-models/zebra.stl" download class="download-link">Download</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
 
-    </div>
+    </div>
 
-    <script>
-        window.onload = function() {
-            // Scene setup
-            const scene = new THREE.Scene();
+    <script>
+        window.onload = function() {
+            // Scene setup
+            const scene = new THREE.Scene();
 
-            // Use a TextureLoader to set the background to an image
-            const textureLoader = new THREE.TextureLoader();
-            textureLoader.load(
-                '3d-models/bliss.png', // Replace with the URL of your background image
-                function(texture) {
-                    scene.background = texture;
-                }
-            );
+            // Use a TextureLoader to set the background to an image
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.load(
+                '3d-models/bliss.png', // Replace with the URL of your background image
+                function(texture) {
+                    scene.background = texture;
+                }
+            );
 
-            // Camera setup
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 2;
+            // Camera setup
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 2;
 
-            // Renderer setup
-            const viewerContainer = document.getElementById('viewer');
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            viewerContainer.appendChild(renderer.domElement);
+            // Renderer setup
+            const viewerContainer = document.getElementById('viewer');
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(viewerContainer.clientWidth, viewerContainer.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            viewerContainer.appendChild(renderer.domElement);
 
-            // Lights changed from.5 to.6
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-            directionalLight.position.set(0, 10, 5);
-            scene.add(directionalLight);
+            // Lights changed from.5 to.6
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight.position.set(0, 10, 5);
+            scene.add(directionalLight);
 
-            // Global variables for interaction
-            let model = null;
-            let isDragging = false;
-            let previousMousePosition = { x: 0, y: 0 };
-            
-            // Function to load and render an STL model
-            function loadSTL(url) {
-                // Remove previous model if it exists
-                if (model) {
-                    scene.remove(model);
-                    model.geometry.dispose();
-                    model.material.dispose();
-                    model = null;
-                }
+            // Global variables for interaction
+            let model = null;
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+            
+            // Function to load and render an STL model
+            function loadSTL(url) {
+                // Remove previous model if it exists
+                if (model) {
+                    scene.remove(model);
+                    model.geometry.dispose();
+                    model.material.dispose();
+                    model = null;
+                }
 
-                // Show a loading message
-                const loadingText = document.createElement('div');
-                loadingText.innerText = 'Loading...';
-                loadingText.style.position = 'absolute';
-                loadingText.style.top = '50%';
-                loadingText.style.left = '50%';
-                loadingText.style.transform = 'translate(-50%, -50%)';
-                loadingText.style.fontSize = '1.2em';
-                loadingText.style.color = '#000';
-                viewerContainer.appendChild(loadingText);
+                // Show a loading message
+                const loadingText = document.createElement('div');
+                loadingText.innerText = 'Loading...';
+                loadingText.style.position = 'absolute';
+                loadingText.style.top = '50%';
+                loadingText.style.left = '50%';
+                loadingText.style.transform = 'translate(-50%, -50%)';
+                loadingText.style.fontSize = '1.2em';
+                loadingText.style.color = '#000';
+                viewerContainer.appendChild(loadingText);
 
-                const loader = new THREE.STLLoader();
-                loader.load(url, function (geometry) {
-                    const material = new THREE.MeshPhongMaterial({ color: 0xff69b4, specular: 0x111111, shininess: 200 });
-                    model = new THREE.Mesh(geometry, material);
-                    
-                    // Center the model in the scene
-                    geometry.computeBoundingBox();
-                    const boundingBox = geometry.boundingBox;
-                    const center = new THREE.Vector3();
-                    boundingBox.getCenter(center);
-                    model.position.sub(center);
+                const loader = new THREE.STLLoader();
+                loader.load(url, function (geometry) {
+                    const material = new THREE.MeshPhongMaterial({ color: 0xff69b4, specular: 0x111111, shininess: 200 });
+                    model = new THREE.Mesh(geometry, material);
+                    
+                    // Center the model in the scene
+                    geometry.computeBoundingBox();
+                    const boundingBox = geometry.boundingBox;
+                    const center = new THREE.Vector3();
+                    boundingBox.getCenter(center);
+                    model.position.sub(center);
 
-                    scene.add(model);
-                    viewerContainer.removeChild(loadingText);
-                }, undefined, function (error) {
-                    console.error('An error happened while loading the model:', error);
-                    loadingText.innerText = 'Error loading model.';
-                });
-            }
+                    scene.add(model);
+                    viewerContainer.removeChild(loadingText);
+                }, undefined, function (error) {
+                    console.error('An error happened while loading the model:', error);
+                    loadingText.innerText = 'Error loading model.';
+                });
+            }
 
-            // --- Interaction Logic ---
-            viewerContainer.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                previousMousePosition.x = e.clientX;
-                previousMousePosition.y = e.clientY;
-            });
+            // --- Interaction Logic ---
+            viewerContainer.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                previousMousePosition.x = e.clientX;
+                previousMousePosition.y = e.clientY;
+            });
 
-            viewerContainer.addEventListener('mousemove', function(e) {
-                if (!isDragging || !model) return;
-                const deltaX = e.clientX - previousMousePosition.x;
-                const deltaY = e.clientY - previousMousePosition.y;
+            viewerContainer.addEventListener('mousemove', function(e) {
+                if (!isDragging || !model) return;
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
 
-                // Rotate the model based on mouse movement
-                model.rotation.y += deltaX * 0.01;
-                model.rotation.x += deltaY * 0.01;
+                // Rotate the model based on mouse movement
+                model.rotation.y += deltaX * 0.01;
+                model.rotation.x += deltaY * 0.01;
 
-                previousMousePosition.x = e.clientX;
-                previousMousePosition.y = e.clientY;
-            });
+                previousMousePosition.x = e.clientX;
+                previousMousePosition.y = e.clientY;
+            });
 
-            viewerContainer.addEventListener('mouseup', function() {
-                isDragging = false;
-            });
+            viewerContainer.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
 
-            // Touch event listeners for mobile devices
-            viewerContainer.addEventListener('touchstart', function(e) {
-                isDragging = true;
-                const touch = e.touches[0];
-                previousMousePosition.x = touch.clientX;
-                previousMousePosition.y = touch.clientY;
-            });
+            // Touch event listeners for mobile devices
+            viewerContainer.addEventListener('touchstart', function(e) {
+                isDragging = true;
+                const touch = e.touches[0];
+                previousMousePosition.x = touch.clientX;
+                previousMousePosition.y = touch.clientY;
+            });
 
-            viewerContainer.addEventListener('touchmove', function(e) {
-                if (!isDragging || !model) return;
-                const touch = e.touches[0];
-                const deltaX = touch.clientX - previousMousePosition.x;
-                const deltaY = touch.clientY - previousMousePosition.y;
+            viewerContainer.addEventListener('touchmove', function(e) {
+                if (!isDragging || !model) return;
+                const touch = e.touches[0];
+                const deltaX = touch.clientX - previousMousePosition.x;
+                const deltaY = touch.clientY - previousMousePosition.y;
 
-                model.rotation.y += deltaX * 0.01;
-                model.rotation.x += deltaY * 0.01;
+                model.rotation.y += deltaX * 0.01;
+                model.rotation.x += deltaY * 0.01;
 
-                previousMousePosition.x = touch.clientX;
-                previousMousePosition.y = touch.clientY;
-            });
+                previousMousePosition.x = touch.clientX;
+                previousMousePosition.y = touch.clientY;
+            });
 
-            viewerContainer.addEventListener('touchend', function() {
-                isDragging = false;
-            });
-            
-            // Add mouse wheel listener for zooming
-            viewerContainer.addEventListener('wheel', function(e) {
-                e.preventDefault();
-                // Adjust the camera's Z position based on the wheel direction
-                camera.position.z += e.deltaY * 0.01;
-                // Clamp the zoom to a reasonable range
-                camera.position.z = Math.max(0.5, Math.min(10, camera.position.z));
-            });
+            viewerContainer.addEventListener('touchend', function() {
+                isDragging = false;
+            });
+            
+            // Add mouse wheel listener for zooming
+            viewerContainer.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                // Adjust the camera's Z position based on the wheel direction
+                camera.position.z += e.deltaY * 0.01;
+                // Clamp the zoom to a reasonable range
+                camera.position.z = Math.max(0.5, Math.min(10, camera.position.z));
+            });
 
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                const width = viewerContainer.clientWidth;
-                const height = viewerContainer.clientHeight;
-                renderer.setSize(width, height);
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-            });
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const width = viewerContainer.clientWidth;
+                const height = viewerContainer.clientHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
 
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-                renderer.render(scene, camera);
-            }
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
 
-            // Event listeners for the model list
-            const modelItems = document.querySelectorAll('.model-item a');
-            modelItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const filePath = this.getAttribute('data-filepath');
-                    if (filePath) {
-                        loadSTL(filePath);
-                    }
-                });
-            });
+                // Rotate the model slowly if not being dragged
+                if (model && !isDragging) {
+                    model.rotation.y += 0.005; // Adjust this value to change the rotation speed
+                }
 
-            // Load a default model on page load
-            loadSTL('3d-models/kitty.stl');
+                renderer.render(scene, camera);
+            }
 
-            animate();
-        };
-    </script>
+            // Event listeners for the model list
+            const modelItems = document.querySelectorAll('.model-item a');
+            modelItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const filePath = this.getAttribute('data-filepath');
+                    if (filePath) {
+                        loadSTL(filePath);
+                    }
+                });
+            });
+
+            // Load a default model on page load
+            loadSTL('3d-models/kitty.stl');
+
+            animate();
+        };
+    </script>
 </body>
 </html>
